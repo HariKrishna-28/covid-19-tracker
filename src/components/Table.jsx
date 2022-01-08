@@ -5,13 +5,17 @@ import numeral from 'numeral'
 const Table = ({ countries }) => {
     return (
         <div className="table">
-            {countries.map(({ country, cases }, key) => (
-                <tr
-                    key={key}>
-                    <td>{country}</td>
-                    <td><strong>{numeral(cases).format()}</strong></td>
-                </tr>
-            ))}
+            <table>
+                <tbody>
+                    {countries.map(({ country, cases }, index) => (
+                        <tr
+                            key={index}>
+                            <td>{country}</td>
+                            <td><strong>{numeral(cases).format()}</strong></td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
 
         </div>
     )

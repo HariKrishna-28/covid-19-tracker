@@ -26,6 +26,17 @@ body {
   flex: 0.9;
 }
 
+.app__right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.app__right h3 {
+  text-align: center;
+}
+
 .app__stats {
   display: flex;
   justify-content: space-between;

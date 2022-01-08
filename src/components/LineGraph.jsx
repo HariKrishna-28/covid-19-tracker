@@ -11,6 +11,7 @@ import {
 } from 'chart.js';
 import { Line } from "react-chartjs-2";
 import numeral from "numeral";
+import axios from "axios";
 
 ChartJS.register(
     CategoryScale,
@@ -38,7 +39,7 @@ const options = {
         intersect: false,
         callbacks: {
             label: function (tooltipItem, data) {
-                return numeral(tooltipItem.value).format("+0,0");
+                return numeral(tooltipItem.data).format("+0,0");
             },
         },
     },
@@ -84,25 +85,41 @@ const buildChartData = (data, casesType) => {
     return chartData
 }
 
-function LineGraph({ casesType = "cases" }) {
+function LineGraph({ countryCode = "worldwide", casesType = "cases" }) {
     const [data, setData] = useState({})
 
     useEffect(() => {
         const fetchData = async () => {
-            await fetch("https://disease.sh/v3/covid-19/historical/all?lastdays=120")
+            // console.log("Code :", countryCode)
+            const url = countryCode === "worldwide"
+                ? "https://disease.sh/v3/covid-19/historical/all?lastdays=120"
+                : `https://disease.sh/v3/covid-19/historical/${countryCode}?lastdays=200`
+
+            axios.get(url)
                 .then((response) => {
-                    return response.json()
-                })
-                .then((data) => {
-                    let chartData = buildChartData(data, casesType)
+                    // console.log("Response Data : ", response.data)
+                    const details = response.data.timeline ? response.data.timeline : response.data
+                    // console.log("details : ", details)
+                    let chartData = buildChartData(details, casesType)
                     setData(chartData)
-                    console.log(chartData)
-                    // buildChart(chartData);
+                    // console.log(chartData)
                 })
+
+
+            // await fetch("https://disease.sh/v3/covid-19/historical/all?lastdays=120")
+            //     .then((response) => {
+            //         return response.json()
+            //     })
+            //     .then((data) => {
+            //         let chartData = buildChartData(data, casesType)
+            //         setData(chartData)
+            //         console.log(chartData)
+            //         // buildChart(chartData);
+            //     })
         }
 
         fetchData()
-    }, [casesType])
+    }, [casesType, countryCode])
 
     return (
         <div>

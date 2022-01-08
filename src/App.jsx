@@ -10,6 +10,7 @@ import numeral from 'numeral';
 function App() {
 
   const [country, setInputCountry] = useState("worldwide")
+  // const [name, setName] = useState("worldwide")
   const [countryInfo, setCountryInfo] = useState({})
   const [countries, setCountries] = useState([])
   const [mapCountries, setMapCountries] = useState([])
@@ -45,11 +46,9 @@ function App() {
     getCountriesData()
   }, [])
 
-  console.log(casesType)
 
   const onCountryChange = async (e) => {
     const countryCode = e.target.value
-
     const url =
       countryCode === "worldwide"
         ? "https://disease.sh/v3/covid-19/all"
@@ -59,7 +58,11 @@ function App() {
       .then((data) => {
         setInputCountry(countryCode)
         setCountryInfo(data)
-        setMapCenter([data.countryInfo.lat, data.countryInfo.long])
+        try {
+          setMapCenter([data.countryInfo.lat, data.countryInfo.long])
+        } catch (err) {
+          setMapCenter({ lat: 34.80746, lng: -40.4796 })
+        }
         setMapZoom(4);
       })
   }
@@ -76,8 +79,8 @@ function App() {
               onChange={onCountryChange}
             >
               <MenuItem value="worldwide">Worldwide</MenuItem>
-              {countries.map((country) => (
-                <MenuItem value={country.value}>{country.name}</MenuItem>
+              {countries.map((country, index) => (
+                <MenuItem key={index} value={country.value}>{country.name}</MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -107,22 +110,25 @@ function App() {
             total={numeral(countryInfo.deaths).format("0.0a")}
           />
         </div>
+
         <Map
           countries={mapCountries}
           casesType={casesType}
           center={mapCenter}
           zoom={mapZoom}
         />
+
       </div>
       <Card className="app__right">
         <CardContent>
           <div className="app__information">
             <h3>Live Cases by Country</h3>
             <Table countries={tableData} />
-            <h3>Worldwide new {casesType}</h3>
-            <LineGraph casesType={casesType} />
+            {/* {console.log(country)} */}
           </div>
         </CardContent>
+        <h3>{casesType} {country !== "worldwide" ? "in" : null} {country}</h3>
+        <LineGraph countryCode={country} casesType={casesType} />
       </Card>
     </div>
   )
