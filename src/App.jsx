@@ -127,6 +127,7 @@ function App() {
             {/* {console.log(country)} */}
           </div>
         </CardContent>
+
         <h3>{casesType} {country !== "worldwide" ? "in" : null} {country}</h3>
         <LineGraph countryCode={country} casesType={casesType} />
       </Card>

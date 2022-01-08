@@ -102,7 +102,7 @@ function LineGraph({ countryCode = "worldwide", casesType = "cases" }) {
                     // console.log("details : ", details)
                     let chartData = buildChartData(details, casesType)
                     setData(chartData)
-                    // console.log(chartData)
+                    console.log(chartData)
                 })
 
 
@@ -122,8 +122,8 @@ function LineGraph({ countryCode = "worldwide", casesType = "cases" }) {
     }, [casesType, countryCode])
 
     return (
-        <div>
-            {data?.length > 0 && (
+        <div >
+            {data?.length > 0 ? (
                 <Line
                     data={{
                         datasets: [
@@ -136,7 +136,7 @@ function LineGraph({ countryCode = "worldwide", casesType = "cases" }) {
                     }}
                     options={options}
                 />
-            )}
+            ) : <h5 style={{ textAlign: "center", marginTop: "10px" }} >No Data Available</h5>}
         </div>
     )
 }
