@@ -1,4 +1,5 @@
 <div align="center">
+<img src = public/coronavirus.png alt = "logo" width = "50" draggable = "false">
 
 # [Covid-19 Tracker](https://covidtracker28.netlify.app/)
 
