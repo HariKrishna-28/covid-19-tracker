@@ -102,7 +102,7 @@ function LineGraph({ countryCode = "worldwide", casesType = "cases" }) {
                     // console.log("details : ", details)
                     let chartData = buildChartData(details, casesType)
                     setData(chartData)
-                    console.log(chartData)
+                    // console.log(chartData)
                 })
 
 
