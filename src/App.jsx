@@ -123,7 +123,9 @@ function App() {
         <CardContent>
           <div className="app__information">
             <h3>Live Cases by Country</h3>
-            <Table countries={tableData} />
+            <Table countries={tableData}
+              changeGraph={(name) => setInputCountry(name)}
+            />
             {/* {console.log(country)} */}
           </div>
         </CardContent>

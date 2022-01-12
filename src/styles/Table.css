@@ -12,6 +12,10 @@
   justify-content: space-between;
 }
 
+.table tr:hover {
+  cursor: pointer;
+}
+
 .table td {
   padding: 0.5rem;
   border: none;
