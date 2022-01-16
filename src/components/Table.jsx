@@ -12,7 +12,7 @@ const Table = ({ countries, changeGraph }) => {
                         <tr
                             onClick={(e) => {
                                 changeGraph(country.countryInfo.iso2)
-                                console.log(country.countryInfo.iso2)
+                                // console.log(country.countryInfo.iso2)
                             }}
 
                             key={index}>

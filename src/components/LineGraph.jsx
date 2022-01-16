@@ -12,7 +12,8 @@ import {
 import { Line } from "react-chartjs-2";
 import numeral from "numeral";
 import axios from "axios";
-
+import { ScaleLoader } from "react-spinners";
+import "../styles/LineGraph.css"
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -87,9 +88,11 @@ const buildChartData = (data, casesType) => {
 
 function LineGraph({ countryCode = "worldwide", casesType = "cases" }) {
     const [data, setData] = useState({})
+    const [loadAnimation, setLoadAnimation] = useState(true)
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoadAnimation(true)
             const url = countryCode === "worldwide"
                 ? "https://disease.sh/v3/covid-19/historical/all?lastdays=120"
                 : `https://disease.sh/v3/covid-19/historical/${countryCode}?lastdays=200`
@@ -98,6 +101,7 @@ function LineGraph({ countryCode = "worldwide", casesType = "cases" }) {
                     const details = response.data.timeline ? response.data.timeline : response.data
                     let chartData = buildChartData(details, casesType)
                     setData(chartData)
+                    setLoadAnimation(false)
                 })
         }
         fetchData()
@@ -105,20 +109,25 @@ function LineGraph({ countryCode = "worldwide", casesType = "cases" }) {
 
     return (
         <div >
-            {data?.length > 0 ? (
-                <Line
-                    data={{
-                        datasets: [
-                            {
-                                backgroundColor: "rgba(204, 16, 52, 0.5)",
-                                borderColor: "#CC1034",
-                                data: data,
-                            },
-                        ],
-                    }}
-                    options={options}
-                />
-            ) : <h5 style={{ textAlign: "center", marginTop: "10px" }} >No Data Available</h5>}
+            {loadAnimation ?
+                <div className="linegraph__loader" >
+                    <ScaleLoader color="black" />
+                </div>
+                : data?.length > 0 ? (
+                    <Line
+                        data={{
+                            datasets: [
+                                {
+                                    backgroundColor: "rgba(204, 16, 52, 0.5)",
+                                    borderColor: "#CC1034",
+                                    data: data,
+                                },
+                            ],
+                        }}
+                        options={options}
+                    />
+                ) : <h5 style={{ textAlign: "center", marginTop: "10px" }} >No Data Available</h5>
+            }
         </div>
     )
 }
