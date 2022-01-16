@@ -3,7 +3,7 @@
 
 # [Covid-19 Tracker](https://covidtracker28.netlify.app/)
 
-> ### _Live worldwide Covid-19 tracker built using Reactjs, ChartJs, MaterialUI and Disease.sh API._
+> ### _Live worldwide Covid-19 tracker_
 
 <br>
 
@@ -25,6 +25,7 @@
 | **[Axios](https://axios-http.com/docs/intro)**      | Promise based HTTP client for the browser and NodeJs |
 | **[Disease.sh](https://corona.lmao.ninja/)**        | Open Disease Data API                                |
 | **[ChartJs](https://www.chartjs.org/docs/latest/)** | Open source JavaScript data visualization library    |
+| **[LeafletJs](https://leafletjs.com/)**             | Open source JavaScript maps library                  |
 
 </div>
 

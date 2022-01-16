@@ -6,7 +6,6 @@ import { sortData, prettyPrintStat } from './helpers/util'
 import 'leaflet/dist/leaflet.css'
 import numeral from 'numeral';
 
-
 function App() {
 
   const [country, setInputCountry] = useState("worldwide")
