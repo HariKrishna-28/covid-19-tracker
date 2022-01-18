@@ -89,10 +89,12 @@ const buildChartData = (data, casesType) => {
 function LineGraph({ countryCode = "worldwide", casesType = "cases" }) {
     const [data, setData] = useState({})
     const [loadAnimation, setLoadAnimation] = useState(true)
+    const [prevCountryCode, setPrevCountryCode] = useState("")
 
     useEffect(() => {
         const fetchData = async () => {
-            setLoadAnimation(true)
+            if (prevCountryCode !== countryCode)
+                setLoadAnimation(true)
             const url = countryCode === "worldwide"
                 ? "https://disease.sh/v3/covid-19/historical/all?lastdays=120"
                 : `https://disease.sh/v3/covid-19/historical/${countryCode}?lastdays=200`
@@ -102,10 +104,11 @@ function LineGraph({ countryCode = "worldwide", casesType = "cases" }) {
                     let chartData = buildChartData(details, casesType)
                     setData(chartData)
                     setLoadAnimation(false)
+                    setPrevCountryCode(countryCode)
                 })
         }
         fetchData()
-    }, [casesType, countryCode])
+    }, [casesType, countryCode, prevCountryCode])
 
     return (
         <div >
