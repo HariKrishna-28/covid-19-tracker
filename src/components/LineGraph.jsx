@@ -111,7 +111,7 @@ function LineGraph({ countryCode = "worldwide", casesType = "cases" }) {
         <div >
             {loadAnimation ?
                 <div className="linegraph__loader" >
-                    <ScaleLoader color="black" />
+                    <ScaleLoader color="#CC1034" />
                 </div>
                 : data?.length > 0 ? (
                     <Line

@@ -70,7 +70,13 @@ function App() {
     <div className="app">
       <div className="app__left">
         <div className="app__header">
-          <h1>COVID-19 Tracker</h1>
+          <h1>
+            COVID-
+            <span style={{ color: "#CC1034" }}>
+              19
+            </span> Tracker
+          </h1>
+
           <FormControl className="app__dropdown">
             <Select
               variant="outlined"
@@ -129,7 +135,7 @@ function App() {
           </div>
         </CardContent>
 
-        <h3>{casesType} {country !== "worldwide" ? "in" : null} {country}</h3>
+        <h3> <span style={{ color: "#CC1034" }}>{casesType.charAt(0).toUpperCase() + casesType.slice(1)}</span> {country !== "worldwide" ? "in" : null} {country}</h3>
         <LineGraph countryCode={country} casesType={casesType} />
       </Card>
     </div>
