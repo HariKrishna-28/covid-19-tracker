@@ -64,4 +64,3 @@ export const showDataOnMap = (data, casesType = "cases") =>
         </Circle >
     ));
 
-

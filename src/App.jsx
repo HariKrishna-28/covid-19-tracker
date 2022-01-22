@@ -9,7 +9,6 @@ import numeral from 'numeral';
 function App() {
 
   const [country, setInputCountry] = useState("worldwide")
-  // const [name, setName] = useState("worldwide")
   const [countryInfo, setCountryInfo] = useState({})
   const [countries, setCountries] = useState([])
   const [mapCountries, setMapCountries] = useState([])
@@ -41,7 +40,6 @@ function App() {
           setTableData(sortedData)
         });
     };
-
     getCountriesData()
   }, [])
 
@@ -130,8 +128,8 @@ function App() {
             <h3>Live Cases by Country</h3>
             <Table countries={tableData}
               changeGraph={(name) => setInputCountry(name)}
+              changeCoordinates={(lat, long) => setMapCenter([lat, long])}
             />
-            {/* {console.log(country)} */}
           </div>
         </CardContent>
 

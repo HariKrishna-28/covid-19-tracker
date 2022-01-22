@@ -30,6 +30,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  padding: 5px;
 }
 
 .app__right h3 {
@@ -46,5 +47,10 @@ body {
 @media (max-width: 990px) {
   .app {
     flex-direction: column;
+  }
+  .app__right {
+    margin-top: 15px;
+    align-items: center;
+    justify-content: center;
   }
 }
