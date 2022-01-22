@@ -62,7 +62,7 @@ function App() {
         } catch (err) {
           setMapCenter({ lat: 34.80746, lng: -40.4796 })
         }
-        setMapZoom(4);
+        setMapZoom(3);
       })
   }
 
