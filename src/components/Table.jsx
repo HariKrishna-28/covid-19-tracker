@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../styles/Table.css'
 import numeral from 'numeral'
+import CountUp from 'react-countup';
+
 
 const Table = ({ countries, changeGraph, changeCoordinates }) => {
+    const [countUp, setCountUp] = useState(false)
     return (
         <div className="table">
             <table>
@@ -15,7 +18,13 @@ const Table = ({ countries, changeGraph, changeCoordinates }) => {
                             }}
                             key={index}>
                             <td>{country.country}</td>
-                            <td><strong>{numeral(country.cases).format()}</strong></td>
+                            {/* <td><strong>{numeral(country.cases).format()}</strong></td> */}
+                            {!countUp &&
+                                <td><strong><CountUp end={country.cases} duration={1} onEnd={() => setCountUp(true)} /></strong></td>
+                            }
+                            {countUp &&
+                                <td><strong>{numeral(country.cases).format()}</strong></td>
+                            }
                         </tr>
                     ))}
                 </tbody>
